@@ -1,4 +1,5 @@
 require "bing/content/api/version"
+require "bing/content/api/client"
 
 module Bing
   module Content
