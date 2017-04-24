@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://login.live.com/oauth20_token.srf
+    body:
+      encoding: UTF-8
+      string: client_id=app_id_foo&client_secret&grant_type=refresh_token&refresh_token=foobarbaz
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      cache-control:
+      - no-store
+      pragma:
+      - no-cache
+      content-length:
+      - '155'
+      content-type:
+      - application/json
+      server:
+      - Microsoft-IIS/8.5
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000
+      x-xss-protection:
+      - 1; mode=block
+      date:
+      - Mon, 24 Apr 2017 22:13:57 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"token_type":"bearer","expires_in":3600,"scope":"bingads.manage","access_token":"dontcare","refresh_token":"refreshtokenAAAfoo","user_id":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}'
+    http_version: 
+  recorded_at: Mon, 24 Apr 2017 22:13:58 GMT
+recorded_with: VCR 3.0.3

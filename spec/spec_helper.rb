@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "bing/content/api"
+require "vcr"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

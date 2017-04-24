@@ -5,6 +5,7 @@ module Bing
     module Api
       class Client
         attr_accessor :refresh_token_callback
+        attr_reader :refresh_token
 
         REDIRECT_URI = "https://login.live.com/oauth20_desktop.srf".freeze
         BMC_HOST = "https://su1.content.api.bingads.microsoft.com".freeze
@@ -54,6 +55,11 @@ module Bing
 
         private
 
+        def refresh_token=(value)
+          @refresh_token_callback.call(value)
+          @refresh_token = value
+        end
+
         def first_time_authorise!
           url = @oauth_client.auth_code.authorize_url(
             :state => "ArizonaIsAState",
@@ -68,14 +74,14 @@ module Bing
             :redirect_uri => REDIRECT_URI
           )
 
-          @refresh_token_callback.call(token.refresh_token)
+          self.refresh_token = token.refresh_token
         end
 
         def refresh_token!
           token = OAuth2::AccessToken.new(@oauth_client, "")
           token.refresh_token = @refresh_token
           token = token.refresh!
-          @refresh_token_callback.call(token.refresh_token)
+          self.refresh_token = token.refresh_token
         end
 
         def extract_code(redirected_url)
