@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Interface with Bing Content API for managing Shopping Ads.}
   spec.homepage      = "https://github.com/redbubble/bing-content-api"
-  spec.license       = "MIT"
+  spec.license       = "WTFPL"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
