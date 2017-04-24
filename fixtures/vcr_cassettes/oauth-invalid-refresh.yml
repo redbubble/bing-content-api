@@ -1,0 +1,88 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://login.live.com/oauth20_token.srf
+    body:
+      encoding: UTF-8
+      string: client_id=app_id_foo&client_secret&grant_type=refresh_token&refresh_token=foobarbazINVALID
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 400
+      message: 
+    headers:
+      cache-control:
+      - no-store
+      pragma:
+      - no-cache
+      content-length:
+      - '120'
+      content-type:
+      - application/json
+      server:
+      - Microsoft-IIS/8.5
+      x-wlid-error:
+      - '0x80049D5C'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000
+      x-xss-protection:
+      - 1; mode=block
+      date:
+      - Mon, 24 Apr 2017 22:45:18 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"error":"invalid_grant","error_description":"The provided value for
+        the input parameter ''refresh_token'' is not valid."}'
+    http_version: 
+  recorded_at: Mon, 24 Apr 2017 22:45:18 GMT
+- request:
+    method: post
+    uri: https://login.live.com/oauth20_token.srf
+    body:
+      encoding: UTF-8
+      string: client_id=app_id_foo&client_secret&code=OAUTH_CODE&grant_type=authorization_code&redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf&redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      cache-control:
+      - no-store
+      pragma:
+      - no-cache
+      content-length:
+      - '150'
+      content-type:
+      - application/json
+      server:
+      - Microsoft-IIS/8.5
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000
+      x-xss-protection:
+      - 1; mode=block
+      date:
+      - Mon, 24 Apr 2017 22:45:38 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"token_type":"bearer","expires_in":3600,"scope":"bingads.manage","access_token":"wedontcare","refresh_token":"refreshtokenBBBfoo","user_id":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}'
+    http_version: 
+  recorded_at: Mon, 24 Apr 2017 22:45:39 GMT
+recorded_with: VCR 3.0.3
