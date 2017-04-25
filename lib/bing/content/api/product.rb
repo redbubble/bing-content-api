@@ -22,6 +22,7 @@ module Bing
           @target_country = target_country
           @content_language = content_language
           @availability = availability
+          @channel = "online"
         end
 
         def bing_product_id
