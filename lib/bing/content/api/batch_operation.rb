@@ -3,8 +3,12 @@ module Bing
     module Api
       class BatchOperation
 
+        attr_reader :batch_id
+        attr_reader :product
+        attr_reader :action
+
         def initialize(batch_id, product, action=:insert)
-          raise "asdf" unless [:insert, :delete].include? action
+          raise "Please select a valid operation." unless [:insert, :delete].include? action
 
           @batch_id = batch_id
           @product = product

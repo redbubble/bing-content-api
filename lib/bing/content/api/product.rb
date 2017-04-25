@@ -2,6 +2,8 @@ module Bing
   module Content
     module Api
       class Product
+        attr_reader :offer_id
+
         def initialize(offer_id,
                        title,
                        description,

@@ -22,6 +22,13 @@ module Bing
           end
         end
 
+        def all_products
+          @operations.map { |op| op.product }
+        end
+
+        def product_by_batch_id(id)
+          @operations.select { |op| op.batch_id == id }.first.product
+        end
       end
     end
   end

@@ -11,10 +11,16 @@ module Bing
           http_response = do_post(post_body)
           body = JSON.parse(http_response.body)
           entries = body["entries"]
-          pp entries
 
           response = Bing::Content::Api::Response.new
+          response.set_all_products(batch.all_products)
 
+          entries.each do |entry|
+            id = entry["batchId"].to_i
+            response.add_success(batch.product_by_batch_id(id))
+          end
+
+          response
         end
 
         def do_post(body)
@@ -35,20 +41,6 @@ module Bing
 
           { entries: operations }.to_json
         end
-
-        # def insert_operations(batch)
-        #   batch.to_update.map do |product|
-        #     { method: "insert",
-        #       product: product.to_record }
-        #   end
-        # end
-
-        # def delete_operations(batch)
-        #   batch.to_delete.map do |product|
-        #     { method: "delete",
-        #       productId: product.bing_product_id }
-        #   end
-        # end
       end
     end
   end
