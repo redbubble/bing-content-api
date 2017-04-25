@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://login.live.com/oauth20_token.srf
+    body:
+      encoding: UTF-8
+      string: client_id=client_id_foo&client_secret&code=code-toto&grant_type=authorization_code&redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf&redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      cache-control:
+      - no-store
+      pragma:
+      - no-cache
+      content-length:
+      - '12'
+      content-type:
+      - application/json
+      server:
+      - Microsoft-IIS/8.5
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000
+      x-xss-protection:
+      - 1; mode=block
+      date:
+      - Tue, 25 Apr 2017 00:00:19 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"token_type":"bearer","expires_in":3600,"scope":"bingads.manage","access_token":"wedontcare","refresh_token":"refresh_token_totoAAA","user_id":"AAAAAAAAAAAAAAAAAAAAAAAAAAAA"}'
+    http_version: 
+  recorded_at: Tue, 25 Apr 2017 00:00:20 GMT
+recorded_with: VCR 3.0.3

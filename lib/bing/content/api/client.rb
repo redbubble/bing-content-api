@@ -12,21 +12,20 @@ module Bing
         # BASE_URI = "/shopping/v9.1/bmc/#{MERCHANT_ID_STAGING}".freeze
 
         def initialize(client_id, developer_token, merchant_id, refresh_token=nil)
-          # TODO check for reasonable client_id and developer_token?
           @client_id = client_id
           @developer_token = developer_token
           @merchant_id = merchant_id
           @refresh_token = refresh_token
 
           @refresh_token_callback = lambda do |x|
-            puts "WARNING: this is the default refrest_token_callback."
+            puts "WARNING: this is the default refresh_token_callback."
             puts "You probably want to implement a callback to save your"\
               " refresh token!  Here it is, though:"
             puts x
           end
 
           @oauth_client = OAuth2::Client.new(@client_id,
-            nil,
+            nil, # client secret isn't applicable for our use
             :site => 'https://login.live.com',
             :authorize_url => '/oauth20_authorize.srf',
             :token_url     => '/oauth20_token.srf',
@@ -34,46 +33,37 @@ module Bing
           )
         end
 
-        def authorise!
-          if not @refresh_token
-            first_time_authorise!
-          else
-            begin
-              refresh_token!
-            rescue OAuth2::Error
-              first_time_authorise!
-            end
-          end
-
-        end
-
-        alias_method :authorize!, :authorise!
+        # def authorise!
+        #   if not @refresh_token
+        #     first_time_authorise!
+        #   else
+        #     begin
+        #       refresh_token!
+        #     rescue OAuth2::Error
+        #       first_time_authorise!
+        #     end
+        #   end
 
         def runBatch(batch)
           # ..
         end
-
-        private
 
         def refresh_token=(value)
           @refresh_token_callback.call(value)
           @refresh_token = value
         end
 
-        def first_time_authorise!
-          url = @oauth_client.auth_code.authorize_url(
+        def generate_user_authorisation_url
+          @oauth_client.auth_code.authorize_url(
             :state => "ArizonaIsAState",
             :scope => "bingads.manage")
+        end
 
-          puts "Visit this URL:"
-          puts url
-          puts "When you've authorized that token, enter the redirected URL:"
-          redirected_url = gets.strip
+        def fetch_token_with_code!(verified_url)
           token = @oauth_client.auth_code.get_token(
-            extract_code(redirected_url),
+            extract_code(verified_url),
             :redirect_uri => REDIRECT_URI
           )
-
           self.refresh_token = token.refresh_token
         end
 
