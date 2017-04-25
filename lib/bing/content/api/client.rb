@@ -6,10 +6,15 @@ module Bing
       class Client
         attr_accessor :refresh_token_callback
         attr_reader :refresh_token
+        attr_reader :developer_token
+
+        #TODO this is temporary!!
+        attr_reader :token
+        ####
 
         REDIRECT_URI = "https://login.live.com/oauth20_desktop.srf".freeze
         BMC_HOST = "https://su1.content.api.bingads.microsoft.com".freeze
-        # BASE_URI = "/shopping/v9.1/bmc/#{MERCHANT_ID_STAGING}".freeze
+
 
         def initialize(client_id, developer_token, merchant_id, refresh_token=nil)
           @client_id = client_id
@@ -17,13 +22,7 @@ module Bing
           @merchant_id = merchant_id
           @refresh_token = refresh_token
           @token = nil
-
-          @refresh_token_callback = lambda do |x|
-            puts "WARNING: this is the default refresh_token_callback."
-            puts "You probably want to implement a callback to save your"\
-              " refresh token!  Here it is, though:"
-            puts x
-          end
+          @refresh_token_callback = nil
 
           @oauth_client = OAuth2::Client.new(@client_id,
             nil, # client secret isn't applicable for our use
@@ -34,23 +33,20 @@ module Bing
           )
         end
 
-        # def authorise!
-        #   if not @refresh_token
-        #     first_time_authorise!
-        #   else
-        #     begin
-        #       refresh_token!
-        #     rescue OAuth2::Error
-        #       first_time_authorise!
-        #     end
-        #   end
-
         def runBatch(batch)
-          # ..
+          batch_processor = Bing::Content::Api::BatchProcessor.new(self)
+          batch_processor.execute batch
         end
 
         def refresh_token=(value)
-          @refresh_token_callback.call(value)
+          if @refresh_token_callback then
+            @refresh_token_callback.call(value)
+          else
+            puts "WARNING: this is the default refresh_token_callback."
+            puts "You probably want to implement a callback to save your"\
+              " refresh token!  Here it is, though:"
+            puts value
+          end
           @refresh_token = value
         end
 
@@ -77,6 +73,20 @@ module Bing
 
         def extract_code(redirected_url)
           /code=([0-9a-zA-Z\-]+)&/.match(redirected_url)[1]
+        end
+
+        def connection
+          # TODO switch to HTTPI?
+          @conn ||= Faraday.new(:url => BMC_HOST) do |faraday|
+            faraday.request  :url_encoded
+            faraday.response :detailed_logger # <-- Inserts the logger into the connection.
+            faraday.adapter  Faraday.default_adapter
+          end
+          @conn
+        end
+
+        def base_uri
+          "/shopping/v9.1/bmc/#{@merchant_id}"
         end
       end
     end
