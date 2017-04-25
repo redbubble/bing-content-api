@@ -29,34 +29,26 @@ module Bing
         end
 
         def to_body(batch)
-          operations = []
-          operations.concat(delete_operations batch)
-          operations.concat(insert_operations batch)
-
-          numberedOperations = []
-
-          operations.each_with_index do |operation, index|
-            newOp = operation
-            newOp[:batchId] = index
-            numberedOperations << newOp
+          operations = batch.operations.map do |op|
+            op.bing_operation
           end
 
-          { entries: numberedOperations }.to_json
+          { entries: operations }.to_json
         end
 
-        def insert_operations(batch)
-          batch.to_update.map do |product|
-            { method: "insert",
-              product: product.to_record }
-          end
-        end
+        # def insert_operations(batch)
+        #   batch.to_update.map do |product|
+        #     { method: "insert",
+        #       product: product.to_record }
+        #   end
+        # end
 
-        def delete_operations(batch)
-          batch.to_delete.map do |product|
-            { method: "delete",
-              productId: product.bing_product_id }
-          end
-        end
+        # def delete_operations(batch)
+        #   batch.to_delete.map do |product|
+        #     { method: "delete",
+        #       productId: product.bing_product_id }
+        #   end
+        # end
       end
     end
   end

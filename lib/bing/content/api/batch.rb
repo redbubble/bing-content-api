@@ -2,25 +2,24 @@ module Bing
   module Content
     module Api
       class Batch
-
-        attr_reader :to_update
-        attr_reader :to_delete
-
-        @counter = 0
+        attr_reader :operations
 
         def initialize
-          @to_update = []
-          @to_delete = []
+          @operations = []
+
+          @ids = (1..1000).to_a
         end
 
-        # TODO keep track of 1000 max operations in a batch?
         def add_insertions(products)
-          # []#concat is in-place!  Ouch!
-          @to_update.concat(products)
+          products.each do |prod|
+            @operations << BatchOperation.new(@ids.pop, prod, :insert)
+          end
         end
 
         def add_deletions(products)
-          @to_delete.concat(products)
+          products.each do |prod|
+            @operations << BatchOperation.new(@ids.pop, prod, :delete)
+          end
         end
 
       end
