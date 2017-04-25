@@ -16,6 +16,7 @@ module Bing
           @developer_token = developer_token
           @merchant_id = merchant_id
           @refresh_token = refresh_token
+          @token = nil
 
           @refresh_token_callback = lambda do |x|
             puts "WARNING: this is the default refresh_token_callback."
@@ -60,18 +61,18 @@ module Bing
         end
 
         def fetch_token_with_code!(verified_url)
-          token = @oauth_client.auth_code.get_token(
+          @token = @oauth_client.auth_code.get_token(
             extract_code(verified_url),
             :redirect_uri => REDIRECT_URI
           )
-          self.refresh_token = token.refresh_token
+          self.refresh_token = @token.refresh_token
         end
 
         def refresh_token!
-          token = OAuth2::AccessToken.new(@oauth_client, "")
-          token.refresh_token = @refresh_token
-          token = token.refresh!
-          self.refresh_token = token.refresh_token
+          @token = OAuth2::AccessToken.new(@oauth_client, "")
+          @token.refresh_token = @refresh_token
+          @token = token.refresh!
+          self.refresh_token = @token.refresh_token
         end
 
         def extract_code(redirected_url)
