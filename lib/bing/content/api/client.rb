@@ -76,7 +76,7 @@ module Bing
         end
 
         def connector
-          @connector ||= Bing::Content::Api::Connector.new(@developer_token, @token, @merchant_id)
+          @connector ||= Bing::Content::Api::Connector.new(@developer_token, @token.token, @merchant_id)
         end
       end
     end

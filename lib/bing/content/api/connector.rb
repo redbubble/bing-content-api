@@ -43,7 +43,7 @@ module Bing
 
         def add_auth_headers(req)
           req.headers['DeveloperToken'] = @developer_token
-          req.headers['AuthenticationToken'] = @token.token
+          req.headers['AuthenticationToken'] = @token
         end
 
         def base_uri
