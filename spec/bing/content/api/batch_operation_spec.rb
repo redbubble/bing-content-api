@@ -5,7 +5,7 @@ RSpec.describe Bing::Content::Api::BatchOperation do
     subject(:batchop) { Bing::Content::Api::BatchOperation }
 
     it "rejects invalid operations" do
-      expect { batchop.new(1, product1, :foo) }.to raise_error
+      expect { batchop.new(1, product1, :foo) }.to raise_error(/select a valid operation/)
     end
 
     it "produces a sane delete job" do
