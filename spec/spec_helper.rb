@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "bing/content/api"
+require 'httpclient'
 require "vcr"
 require 'support/factory_girl'
 
@@ -14,5 +15,5 @@ end
 
 VCR.configure do |config|
   config.cassette_library_dir = "fixtures/vcr_cassettes"
-  config.hook_into :faraday
+  config.hook_into :webmock
 end

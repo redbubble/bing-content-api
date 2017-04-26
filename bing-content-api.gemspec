@@ -34,7 +34,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "vcr", "~> 3.0.3"
   spec.add_development_dependency "factory_girl", "~> 4.0"
-  spec.add_development_dependency "faraday-detailed_logger", "~> 2.1.1"
+  spec.add_development_dependency "httpclient", "~> 2.8.3"
+  spec.add_development_dependency "webmock", "~> 3.0.1"
 
   spec.add_dependency "oauth2", "~> 1.3.1"
+  spec.add_dependency "httpi", "~> 2.4.2"
 end

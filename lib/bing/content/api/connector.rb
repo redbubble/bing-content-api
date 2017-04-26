@@ -1,4 +1,4 @@
-require 'faraday/detailed_logger'
+require 'httpi'
 
 module Bing
   module Content
@@ -13,33 +13,24 @@ module Bing
         end
 
         def get(path)
-          connection.get do |req|
-            req.url base_uri + path
-            req.headers['Content-Type'] = 'application/json'
-            add_auth_headers(req)
-          end
+          request = HTTPI::Request.new
+          request.url = BMC_HOST + base_uri + path
+          # req.params['bmc-catalog-id'] = '148630' # this should be the default cat
+          request.headers['Content-Type'] = 'application/json'
+          add_auth_headers(request)
+          HTTPI.get(request)
         end
 
         def post(path, body)
-          connection.post do |req|
-            req.url base_uri + path
-            # req.params['bmc-catalog-id'] = '148630' # this should be the default cat
-            req.headers['Content-Type'] = 'application/json'
-            add_auth_headers(req)
-            req.body = body
-          end
+          request = HTTPI::Request.new
+          request.url = BMC_HOST + base_uri + path
+          request.body = body
+          request.headers['Content-Type'] = 'application/json'
+          add_auth_headers(request)
+          HTTPI.post(request)
         end
 
         private
-
-        def connection
-          # TODO switch to HTTPI?
-          @connection ||= Faraday.new(:url => BMC_HOST) do |faraday|
-            faraday.request  :url_encoded
-            faraday.response :detailed_logger # <-- Inserts the logger into the connection.
-            faraday.adapter  Faraday.default_adapter
-          end
-        end
 
         def add_auth_headers(req)
           req.headers['DeveloperToken'] = @developer_token
