@@ -1,0 +1,149 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://login.live.com/oauth20_token.srf
+    body:
+      encoding: UTF-8
+      string: client_id=app_id_foo&client_secret&grant_type=refresh_token&refresh_token=refresh_token
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      cache-control:
+      - no-store
+      pragma:
+      - no-cache
+      content-length:
+      - '1552'
+      content-type:
+      - application/json
+      server:
+      - Microsoft-IIS/8.5
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000
+      x-xss-protection:
+      - 1; mode=block
+      date:
+      - Wed, 26 Apr 2017 18:23:35 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"token_type":"bearer","expires_in":3600,"scope":"bingads.manage","access_token":"dontcaretoken","refresh_token":"refresh_token","user_id":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}'
+    http_version: 
+  recorded_at: Wed, 26 Apr 2017 18:23:36 GMT
+- request:
+    method: post
+    uri: https://su1.content.api.bingads.microsoft.com/shopping/v9.1/bmc/123/products/batch
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"batchId":1000,"product":{"offerId":"3051759-US-sticker","title":"Awesome
+        sticker","description":"this is the best sticker in the world","price":{"currency":"USD","value":6.66},"imageLink":"https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg","link":"https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small","targetCountry":"US","contentLanguage":"en","availability":"in
+        stock","channel":"online","condition":"new"},"method":"insert"}]}'
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/json
+      DeveloperToken:
+      - dev_token_foo
+      AuthenticationToken:
+      - dontcaretoken
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      content-type:
+      - application/json
+      vary:
+      - Accept-Encoding
+      server:
+      - Microsoft-IIS/8.5
+      webrequestactivityid:
+      - 749caa1f-64d5-4576-af62-fc1870424672
+      x-powered-by:
+      - ASP.NET
+      date:
+      - Wed, 26 Apr 2017 18:23:35 GMT
+      connection:
+      - close
+      content-length:
+      - '559'
+    body:
+      encoding: ASCII-8BIT
+      string: "{\r\n  \"kind\": \"content#productsCustomBatchResponse\",\r\n  \"entries\":
+        [\r\n    {\r\n      \"batchId\": \"1000\",\r\n      \"product\": {\r\n        \"availability\":
+        \"in stock\",\r\n        \"channel\": \"online\",\r\n        \"condition\":
+        \"new\",\r\n        \"contentLanguage\": \"en\",\r\n        \"description\":
+        \"this is the best sticker in the world\",\r\n        \"id\": \"online:en:US:3051759-US-sticker\",\r\n
+        \       \"imageLink\": \"https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg\",\r\n
+        \       \"link\": \"https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small\",\r\n
+        \       \"offerId\": \"3051759-US-sticker\",\r\n        \"price\": {\r\n          \"currency\":
+        \"USD\",\r\n          \"value\": 6.66\r\n        },\r\n        \"targetCountry\":
+        \"US\",\r\n        \"title\": \"Awesome sticker\"\r\n      }\r\n    }\r\n
+        \ ]\r\n}"
+    http_version: 
+  recorded_at: Wed, 26 Apr 2017 18:23:36 GMT
+- request:
+    method: get
+    uri: https://su1.content.api.bingads.microsoft.com/shopping/v9.1/bmc/123/products
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/json
+      DeveloperToken:
+      - dev_token_foo
+      AuthenticationToken:
+      - dontcaretoken
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      content-type:
+      - application/json
+      vary:
+      - Accept-Encoding
+      server:
+      - Microsoft-IIS/8.5
+      webrequestactivityid:
+      - 9499590e-8857-4280-a7db-5fd4876ad6e7
+      x-powered-by:
+      - ASP.NET
+      date:
+      - Wed, 26 Apr 2017 18:23:36 GMT
+      connection:
+      - close
+      content-length:
+      - '815'
+    body:
+      encoding: ASCII-8BIT
+      string: "{\r\n  \"kind\": \"content#productsListResponse\",\r\n  \"resources\":
+        [\r\n    {\r\n      \"adult\": \"False\",\r\n      \"availability\":
+        \"in stock\",\r\n      \"channel\": \"online\",\r\n      \"condition\": \"new\",\r\n
+        \     \"contentLanguage\": \"en\",\r\n      \"description\": \"this is the
+        best sticker in the world\",\r\n      \"expirationDate\": \"2017-05-26T10:23:35-08:00\",\r\n
+        \     \"id\": \"online:en:US:3051759-US-sticker\",\r\n      \"identifierExists\":
+        \"True\",\r\n      \"imageLink\": \"https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg\",\r\n
+        \     \"kind\": \"content#product\",\r\n      \"link\": \"https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small\",\r\n
+        \     \"offerId\": \"3051759-US-sticker\",\r\n      \"onlineOnly\": \"False\",\r\n
+        \     \"price\": {\r\n        \"currency\": \"USD\",\r\n        \"value\":
+        6.66\r\n      },\r\n      \"targetCountry\": \"US\",\r\n      \"title\": \"Awesome
+        sticker\"\r\n    }\r\n    ]\r\n}"
+    http_version: 
+  recorded_at: Wed, 26 Apr 2017 18:23:37 GMT
+recorded_with: VCR 3.0.3

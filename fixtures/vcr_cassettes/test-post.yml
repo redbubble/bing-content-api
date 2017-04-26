@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://su1.content.api.bingads.microsoft.com/shopping/v9.1/bmc/123/products/batch
+    body:
+      encoding: UTF-8
+      string: '{"entries": [] }'
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/json
+      DeveloperToken:
+      - dev_token_foo
+      AuthenticationToken:
+      - token_foo
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      content-type:
+      - application/json
+      vary:
+      - Accept-Encoding
+      server:
+      - Microsoft-IIS/8.5
+      webrequestactivityid:
+      - 506771cc-37d8-45ee-ad9c-83054da87dce
+      x-powered-by:
+      - ASP.NET
+      date:
+      - Wed, 26 Apr 2017 22:00:19 GMT
+      connection:
+      - close
+      content-length:
+      - '181'
+    body:
+      encoding: ASCII-8BIT
+      string: "{\r\n  \"kind\": \"content#productsCustomBatchResponse\",\r\n  \"entries\":
+        []\r\n}"
+    http_version: 
+  recorded_at: Wed, 26 Apr 2017 22:00:19 GMT
+recorded_with: VCR 3.0.3

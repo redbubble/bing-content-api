@@ -1,6 +1,7 @@
 require "bundler/setup"
 require "bing/content/api"
 require "vcr"
+require 'support/factory_girl'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -9,4 +10,9 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "fixtures/vcr_cassettes"
+  config.hook_into :faraday
 end

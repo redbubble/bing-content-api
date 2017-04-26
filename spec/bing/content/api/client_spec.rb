@@ -1,8 +1,3 @@
-VCR.configure do |config|
-  config.cassette_library_dir = "fixtures/vcr_cassettes"
-  config.hook_into :faraday
-end
-
 RSpec.describe Bing::Content::Api::Client do
 
   context "has valid refresh_token" do

@@ -1,0 +1,115 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://su1.content.api.bingads.microsoft.com/shopping/v9.1/bmc/123/products
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/json
+      DeveloperToken:
+      - dev_token_foo
+      AuthenticationToken:
+      - token_foo
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      content-type:
+      - application/json
+      vary:
+      - Accept-Encoding
+      server:
+      - Microsoft-IIS/8.5
+      webrequestactivityid:
+      - 0d2851c6-a21e-4963-9449-d06183f8d193
+      x-powered-by:
+      - ASP.NET
+      date:
+      - Wed, 26 Apr 2017 21:48:08 GMT
+      connection:
+      - close
+      content-length:
+      - '815'
+    body:
+      encoding: ASCII-8BIT
+      string: "{\r\n  \"kind\": \"content#productsListResponse\",\r\n  \"resources\":
+        [\r\n    {\r\n      \"adult\": \"False\",\r\n      \"availability\": \"in
+        stock\",\r\n      \"channel\": \"online\",\r\n      \"condition\": \"new\",\r\n
+        \     \"contentLanguage\": \"en\",\r\n      \"description\": \"this is the
+        best sticker in the world #1\",\r\n      \"expirationDate\": \"2017-05-25T15:39:03-08:00\",\r\n
+        \     \"id\": \"online:en:US:3051759-US-sticker-1\",\r\n      \"identifierExists\":
+        \"True\",\r\n      \"imageLink\": \"https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg\",\r\n
+        \     \"kind\": \"content#product\",\r\n      \"link\": \"https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small\",\r\n
+        \     \"offerId\": \"3051759-US-sticker-1\",\r\n      \"onlineOnly\": \"False\",\r\n
+        \     \"price\": {\r\n        \"currency\": \"USD\",\r\n        \"value\":
+        6.66\r\n      },\r\n      \"targetCountry\": \"US\",\r\n      \"title\": \"Awesome
+        sticker #1\"\r\n    },\r\n    {\r\n      \"adult\": \"False\",\r\n      \"availability\":
+        \"in stock\",\r\n      \"channel\": \"online\",\r\n      \"condition\": \"new\",\r\n
+        \     \"contentLanguage\": \"en\",\r\n      \"description\": \"this is the
+        best sticker in the world\",\r\n      \"expirationDate\": \"2017-05-26T10:23:35-08:00\",\r\n
+        \     \"id\": \"online:en:US:3051759-US-sticker\",\r\n      \"identifierExists\":
+        \"True\",\r\n      \"imageLink\": \"https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg\",\r\n
+        \     \"kind\": \"content#product\",\r\n      \"link\": \"https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small\",\r\n
+        \     \"offerId\": \"3051759-US-sticker\",\r\n      \"onlineOnly\": \"False\",\r\n
+        \     \"price\": {\r\n        \"currency\": \"USD\",\r\n        \"value\":
+        6.66\r\n      },\r\n      \"targetCountry\": \"US\",\r\n      \"title\": \"Awesome
+        sticker\"\r\n    },\r\n    {\r\n      \"adult\": \"False\",\r\n      \"availability\":
+        \"in stock\",\r\n      \"channel\": \"online\",\r\n      \"condition\": \"new\",\r\n
+        \     \"contentLanguage\": \"en\",\r\n      \"description\": \"this is the
+        best sticker in the world #2\",\r\n      \"expirationDate\": \"2017-05-25T15:39:03-08:00\",\r\n
+        \     \"id\": \"online:en:US:3051759-US-sticker-2\",\r\n      \"identifierExists\":
+        \"True\",\r\n      \"imageLink\": \"https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg\",\r\n
+        \     \"kind\": \"content#product\",\r\n      \"link\": \"https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small\",\r\n
+        \     \"offerId\": \"3051759-US-sticker-2\",\r\n      \"onlineOnly\": \"False\",\r\n
+        \     \"price\": {\r\n        \"currency\": \"USD\",\r\n        \"value\":
+        6.66\r\n      },\r\n      \"targetCountry\": \"US\",\r\n      \"title\": \"Awesome
+        sticker #2\"\r\n    },\r\n    {\r\n      \"adult\": \"False\",\r\n      \"availability\":
+        \"in stock\",\r\n      \"channel\": \"online\",\r\n      \"condition\": \"new\",\r\n
+        \     \"contentLanguage\": \"en\",\r\n      \"description\": \"this is the
+        best sticker in the world #3\",\r\n      \"expirationDate\": \"2017-05-25T15:39:03-08:00\",\r\n
+        \     \"id\": \"online:en:US:3051759-US-sticker-3\",\r\n      \"identifierExists\":
+        \"True\",\r\n      \"imageLink\": \"https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg\",\r\n
+        \     \"kind\": \"content#product\",\r\n      \"link\": \"https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small\",\r\n
+        \     \"offerId\": \"3051759-US-sticker-3\",\r\n      \"onlineOnly\": \"False\",\r\n
+        \     \"price\": {\r\n        \"currency\": \"USD\",\r\n        \"value\":
+        6.66\r\n      },\r\n      \"targetCountry\": \"US\",\r\n      \"title\": \"Awesome
+        sticker #3\"\r\n    },\r\n    {\r\n      \"adult\": \"False\",\r\n      \"availability\":
+        \"in stock\",\r\n      \"channel\": \"online\",\r\n      \"condition\": \"new\",\r\n
+        \     \"contentLanguage\": \"en\",\r\n      \"description\": \"this is the
+        best sticker in the world #9\",\r\n      \"expirationDate\": \"2017-05-25T15:39:03-08:00\",\r\n
+        \     \"id\": \"online:en:US:3051759-US-sticker-9\",\r\n      \"identifierExists\":
+        \"True\",\r\n      \"imageLink\": \"https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg\",\r\n
+        \     \"kind\": \"content#product\",\r\n      \"link\": \"https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small\",\r\n
+        \     \"offerId\": \"3051759-US-sticker-9\",\r\n      \"onlineOnly\": \"False\",\r\n
+        \     \"price\": {\r\n        \"currency\": \"USD\",\r\n        \"value\":
+        6.66\r\n      },\r\n      \"targetCountry\": \"US\",\r\n      \"title\": \"Awesome
+        sticker #9\"\r\n    },\r\n    {\r\n      \"adult\": \"False\",\r\n      \"availability\":
+        \"in stock\",\r\n      \"channel\": \"online\",\r\n      \"condition\": \"new\",\r\n
+        \     \"contentLanguage\": \"en\",\r\n      \"description\": \"this is the
+        best sticker in the world #8\",\r\n      \"expirationDate\": \"2017-05-25T15:39:03-08:00\",\r\n
+        \     \"id\": \"online:en:US:3051759-US-sticker-8\",\r\n      \"identifierExists\":
+        \"True\",\r\n      \"imageLink\": \"https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg\",\r\n
+        \     \"kind\": \"content#product\",\r\n      \"link\": \"https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small\",\r\n
+        \     \"offerId\": \"3051759-US-sticker-8\",\r\n      \"onlineOnly\": \"False\",\r\n
+        \     \"price\": {\r\n        \"currency\": \"USD\",\r\n        \"value\":
+        6.66\r\n      },\r\n      \"targetCountry\": \"US\",\r\n      \"title\": \"Awesome
+        sticker #8\"\r\n    },\r\n    {\r\n      \"adult\": \"False\",\r\n      \"availability\":
+        \"in stock\",\r\n      \"channel\": \"online\",\r\n      \"condition\": \"new\",\r\n
+        \     \"contentLanguage\": \"en\",\r\n      \"description\": \"this is the
+        best sticker in the world #7\",\r\n      \"expirationDate\": \"2017-05-25T15:39:03-08:00\",\r\n
+        \     \"id\": \"online:en:US:3051759-US-sticker-7\",\r\n      \"identifierExists\":
+        \"True\",\r\n      \"imageLink\": \"https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg\",\r\n
+        \     \"kind\": \"content#product\",\r\n      \"link\": \"https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small\",\r\n
+        \     \"offerId\": \"3051759-US-sticker-7\",\r\n      \"onlineOnly\": \"False\",\r\n
+        \     \"price\": {\r\n        \"currency\": \"USD\",\r\n        \"value\":
+        6.66\r\n      },\r\n      \"targetCountry\": \"US\",\r\n      \"title\": \"Awesome
+        sticker #7\"\r\n    }\r\n  ]\r\n}"
+    http_version: 
+  recorded_at: Wed, 26 Apr 2017 21:48:09 GMT
+recorded_with: VCR 3.0.3

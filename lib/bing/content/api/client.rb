@@ -6,23 +6,17 @@ module Bing
       class Client
         attr_accessor :refresh_token_callback
         attr_reader :refresh_token
+        attr_reader :developer_token
 
         REDIRECT_URI = "https://login.live.com/oauth20_desktop.srf".freeze
-        BMC_HOST = "https://su1.content.api.bingads.microsoft.com".freeze
-        # BASE_URI = "/shopping/v9.1/bmc/#{MERCHANT_ID_STAGING}".freeze
 
         def initialize(client_id, developer_token, merchant_id, refresh_token=nil)
           @client_id = client_id
           @developer_token = developer_token
           @merchant_id = merchant_id
           @refresh_token = refresh_token
-
-          @refresh_token_callback = lambda do |x|
-            puts "WARNING: this is the default refresh_token_callback."
-            puts "You probably want to implement a callback to save your"\
-              " refresh token!  Here it is, though:"
-            puts x
-          end
+          @token = nil
+          @refresh_token_callback = nil
 
           @oauth_client = OAuth2::Client.new(@client_id,
             nil, # client secret isn't applicable for our use
@@ -33,26 +27,6 @@ module Bing
           )
         end
 
-        # def authorise!
-        #   if not @refresh_token
-        #     first_time_authorise!
-        #   else
-        #     begin
-        #       refresh_token!
-        #     rescue OAuth2::Error
-        #       first_time_authorise!
-        #     end
-        #   end
-
-        def runBatch(batch)
-          # ..
-        end
-
-        def refresh_token=(value)
-          @refresh_token_callback.call(value)
-          @refresh_token = value
-        end
-
         def generate_user_authorisation_url
           @oauth_client.auth_code.authorize_url(
             :state => "ArizonaIsAState",
@@ -60,22 +34,49 @@ module Bing
         end
 
         def fetch_token_with_code!(verified_url)
-          token = @oauth_client.auth_code.get_token(
+          @token = @oauth_client.auth_code.get_token(
             extract_code(verified_url),
             :redirect_uri => REDIRECT_URI
           )
-          self.refresh_token = token.refresh_token
+          self.refresh_token = @token.refresh_token
         end
 
         def refresh_token!
-          token = OAuth2::AccessToken.new(@oauth_client, "")
-          token.refresh_token = @refresh_token
-          token = token.refresh!
-          self.refresh_token = token.refresh_token
+          @token = OAuth2::AccessToken.new(@oauth_client, "")
+          @token.refresh_token = @refresh_token
+          @token = @token.refresh!
+          self.refresh_token = @token.refresh_token
+        end
+
+        def runBatch(batch)
+          batch_processor = Bing::Content::Api::BatchProcessor.new(connector)
+          batch_processor.execute(batch)
+        end
+
+        def retrieve_catalogue
+          JSON.parse(connector.get('/products').body)["resources"]
+        end
+
+        private
+
+        def refresh_token=(value)
+          if @refresh_token_callback then
+            @refresh_token_callback.call(value)
+          else
+            puts "WARNING: this is the default refresh_token_callback."
+            puts "You probably want to implement a callback to save your"\
+              " refresh token!  Here it is, though:"
+            puts value
+          end
+          @refresh_token = value
         end
 
         def extract_code(redirected_url)
           /code=([0-9a-zA-Z\-]+)&/.match(redirected_url)[1]
+        end
+
+        def connector
+          @connector ||= Bing::Content::Api::Connector.new(@developer_token, @token.token, @merchant_id)
         end
       end
     end
