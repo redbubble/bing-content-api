@@ -1,3 +1,5 @@
+require 'faraday/detailed_logger'
+
 module Bing
   module Content
     module Api
