@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :product, class: Bing::Content::Api::Product do
-    ignore do
+    transient do
       offer_id "3051759-US-sticker"
       title "Awesome sticker"
       description "this is the best sticker in the world"
