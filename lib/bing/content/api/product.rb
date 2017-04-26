@@ -31,17 +31,17 @@ module Bing
 
         def to_record
           {
-            offerId: @offer_id,
-            title: @title,
-            description: @description,
-            price: { currency: "USD", value: @price },
-            imageLink: @image_link,
-            link: @product_link,
-            targetCountry: @target_country,
-            contentLanguage: @content_language,
-            availability: @availability,
-            channel: "online",
-            condition: "new",
+            "offerId" => @offer_id,
+            "title" => @title,
+            "description" => @description,
+            "price" => { "currency" => "USD", "value" => @price }, # TODO multiple currencies?
+            "imageLink" => @image_link,
+            "link" => @product_link,
+            "targetCountry" => @target_country,
+            "contentLanguage" => @content_language,
+            "availability" => @availability,
+            "channel" => "online",
+            "condition" => "new",
           }
         end
       end
