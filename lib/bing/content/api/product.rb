@@ -12,7 +12,8 @@ module Bing
                        image_link,
                        target_country="US",
                        content_language="en",
-                       availability="in stock")
+                       availability="in stock",
+                       channel="online")
           @offer_id = offer_id
           @title = title
           @description = description
@@ -22,7 +23,7 @@ module Bing
           @target_country = target_country
           @content_language = content_language
           @availability = availability
-          @channel = "online"
+          @channel = channel
         end
 
         def bing_product_id
@@ -40,7 +41,7 @@ module Bing
             "targetCountry" => @target_country,
             "contentLanguage" => @content_language,
             "availability" => @availability,
-            "channel" => "online",
+            "channel" => @channel,
             "condition" => "new",
           }
         end
