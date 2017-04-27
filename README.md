@@ -58,7 +58,7 @@ def product(n=0)
     "sticker-#{n}",
     "Awesome sticker ##{n}",
     "this is the best sticker in the world ##{n}",
-    "6.66",
+    6.66,
     "https://www.your-store.com/people/toothbrush/works/3051759-a-thing?p=sticker&size=small",
     "https://ih1.your-store.net/image.72080/sticker,375x360.jpg",
     "US",
