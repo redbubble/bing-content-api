@@ -33,12 +33,15 @@ Unfortunately, that's a process that requires interactive user
 intervention.  Once you've got a refresh token though, you shouldn't
 need to worry about manual intervention any more.
 
+The catalogue ID is optional.
+
 ```ruby
 auth = retrieve_my_saved_token
 bing_client = Bing::Content::Api::Client.new(APPLICATION_ID,
                                              DEVELOPER_TOKEN,
                                              MERCHANT_ID_STAGING,
-                                             refresh_token=auth)
+                                             auth,
+                                             catalogue_id)
 ```
 
 Instantiating the `Client` class will automatically fetch a refresh
@@ -47,6 +50,7 @@ to do something like the following:
 
 ```ruby
 puts bing_client.generate_user_authorisation_url
+# Visit the URL printed, click all the things, and paste the redirect URL in here:
 code = gets.strip
 bing_client.fetch_token_with_code!(code)
 ```
