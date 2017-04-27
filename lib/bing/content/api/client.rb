@@ -10,11 +10,12 @@ module Bing
 
         REDIRECT_URI = "https://login.live.com/oauth20_desktop.srf".freeze
 
-        def initialize(client_id, developer_token, merchant_id, refresh_token=nil)
+        def initialize(client_id, developer_token, merchant_id, refresh_token=nil, catalogue_id=nil)
           @client_id = client_id
           @developer_token = developer_token
           @merchant_id = merchant_id
           @refresh_token = refresh_token
+          @catalogue_id = catalogue_id
           @token = nil
           @refresh_token_callback = nil
         end
@@ -70,7 +71,10 @@ module Bing
 
         def connector
           refresh_token! unless @connector
-          @connector ||= Bing::Content::Api::Connector.new(@developer_token, @token.token, @merchant_id)
+          @connector ||= Bing::Content::Api::Connector.new(@developer_token,
+                                                           @token.token,
+                                                           @merchant_id,
+                                                           @catalogue_id)
         end
 
         def oauth_client
