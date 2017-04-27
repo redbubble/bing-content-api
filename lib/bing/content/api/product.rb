@@ -8,6 +8,7 @@ module Bing
                        title,
                        description,
                        price,
+                       currency,
                        product_link,
                        image_link,
                        target_country="US",
@@ -18,6 +19,7 @@ module Bing
           @title = title
           @description = description
           @price = price
+          @currency = currency
           @product_link = product_link
           @image_link = image_link
           @target_country = target_country
@@ -35,7 +37,7 @@ module Bing
             "offerId" => @offer_id,
             "title" => @title,
             "description" => @description,
-            "price" => { "currency" => "USD", "value" => @price }, # TODO multiple currencies?
+            "price" => { "currency" => @currency, "value" => @price },
             "imageLink" => @image_link,
             "link" => @product_link,
             "targetCountry" => @target_country,
