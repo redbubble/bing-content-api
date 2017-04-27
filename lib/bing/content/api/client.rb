@@ -17,34 +17,19 @@ module Bing
           @refresh_token = refresh_token
           @token = nil
           @refresh_token_callback = nil
-
-          @oauth_client = OAuth2::Client.new(@client_id,
-            nil, # client secret isn't applicable for our use
-            :site => 'https://login.live.com',
-            :authorize_url => '/oauth20_authorize.srf',
-            :token_url     => '/oauth20_token.srf',
-            :redirect_uri  => REDIRECT_URI
-          )
         end
 
         def generate_user_authorisation_url
-          @oauth_client.auth_code.authorize_url(
+          oauth_client.auth_code.authorize_url(
             :state => "ArizonaIsAState",
             :scope => "bingads.manage")
         end
 
         def fetch_token_with_code!(verified_url)
-          @token = @oauth_client.auth_code.get_token(
+          @token = oauth_client.auth_code.get_token(
             extract_code(verified_url),
             :redirect_uri => REDIRECT_URI
           )
-          self.refresh_token = @token.refresh_token
-        end
-
-        def refresh_token!
-          @token = OAuth2::AccessToken.new(@oauth_client, "")
-          @token.refresh_token = @refresh_token
-          @token = @token.refresh!
           self.refresh_token = @token.refresh_token
         end
 
@@ -54,10 +39,18 @@ module Bing
         end
 
         def retrieve_catalogue
-          JSON.parse(connector.get('/products').body)["resources"]
+          response = connector.get('/products')
+          JSON.parse(response.body)["resources"]
         end
 
         private
+
+        def refresh_token!
+          @token = OAuth2::AccessToken.new(oauth_client, "")
+          @token.refresh_token = @refresh_token
+          @token = @token.refresh!
+          self.refresh_token = @token.refresh_token
+        end
 
         def refresh_token=(value)
           if @refresh_token_callback then
@@ -76,7 +69,18 @@ module Bing
         end
 
         def connector
+          refresh_token! unless @connector
           @connector ||= Bing::Content::Api::Connector.new(@developer_token, @token.token, @merchant_id)
+        end
+
+        def oauth_client
+          @oauth_client ||= OAuth2::Client.new(@client_id,
+            nil, # client secret isn't applicable for our use
+            :site => 'https://login.live.com',
+            :authorize_url => '/oauth20_authorize.srf',
+            :token_url     => '/oauth20_token.srf',
+            :redirect_uri  => REDIRECT_URI
+          )
         end
       end
     end

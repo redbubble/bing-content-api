@@ -17,8 +17,6 @@ RSpec.describe Bing::Content::Api::Client do
 
     it "successfully inserts a product into the catalog" do
       VCR.use_cassette("insert-product-integration") do
-        bing_client.refresh_token!
-
         batch = Bing::Content::Api::Batch.new
         batch.add_insertions([product])
 

@@ -34,18 +34,21 @@ intervention.  Once you've got a refresh token though, you shouldn't
 need to worry about manual intervention any more.
 
 ```ruby
+auth = retrieve_my_saved_token
 bing_client = Bing::Content::Api::Client.new(APPLICATION_ID,
                                              DEVELOPER_TOKEN,
                                              MERCHANT_ID_STAGING,
                                              refresh_token=auth)
+```
 
-if auth then
-  bing_client.refresh_token!
-else
-  puts bing_client.generate_user_authorisation_url
-  code = gets.strip
-  bing_client.fetch_token_with_code!(code)
-end
+Instantiating the `Client` class will automatically fetch a refresh
+token for you.  If you still need to get a token, you'll probably want
+to do something like the following:
+
+```ruby
+puts bing_client.generate_user_authorisation_url
+code = gets.strip
+bing_client.fetch_token_with_code!(code)
 ```
 
 Right, we're in business!  When you've got the required tokens, you'll
