@@ -8,13 +8,17 @@ RSpec.describe Bing::Content::Api::Batch do
 
     subject(:batch) { Bing::Content::Api::Batch.new }
 
-    it "starts empty" do
-      expect(batch.operations).to match_array([])
+    describe "#initialize" do
+      it "starts empty" do
+        expect(batch.operations).to match_array([])
+      end
     end
 
-    it "correctly models insertion" do
-      batch.add_insertions([product1])
-      expect(batch.operations.length).to eq(1)
+    describe "#add_insertions" do
+      it "correctly models insertion" do
+        batch.add_insertions([product1])
+        expect(batch.operations.length).to eq(1)
+      end
     end
 
     it "isn't amnesiac" do
@@ -23,16 +27,24 @@ RSpec.describe Bing::Content::Api::Batch do
       expect(batch.all_products).to match_array([product1, product2, product3, product4, product5])
     end
 
-    it "retrieves products correctly" do
-      batch.add_insertions([product1, product2, product3])
-      batch.add_deletions([product4, product5])
-      expect(batch.product_by_batch_id(999)).to eq(product2)
+    describe "#product_by_batch_id" do
+      it "retrieves products correctly" do
+        batch.add_insertions([product1, product2, product3])
+        batch.add_deletions([product4, product5])
+        expect(batch.product_by_batch_id(999)).to eq(product2)
+      end
+
+      it "complains on invalid batch id" do
+        batch.add_insertions([product1, product2, product3])
+        batch.add_deletions([product4, product5])
+        expect { batch.product_by_batch_id(99) }.to raise_exception(/nil:NilClass/)
+      end
     end
 
-    it "complains on invalid batch id" do
-      batch.add_insertions([product1, product2, product3])
-      batch.add_deletions([product4, product5])
-      expect { batch.product_by_batch_id(99) }.to raise_exception(/nil:NilClass/)
+    describe "#to_body" do
+      it "has the right shape" do
+        expect(subject.to_body["entries"]).not_to be_nil
+      end
     end
   end
 end

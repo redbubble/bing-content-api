@@ -7,7 +7,7 @@ module Bing
         end
 
         def execute(batch)
-          post_body = to_body(batch)
+          post_body = batch.to_body
           http_response = @connector.post('/products/batch', post_body)
           body = JSON.parse(http_response.body)
           entries = body["entries"]
@@ -23,15 +23,6 @@ module Bing
           response
         end
 
-        private
-
-        def to_body(batch)
-          operations = batch.operations.map do |op|
-            op.bing_operation
-          end
-
-          { entries: operations }.to_json
-        end
       end
     end
   end

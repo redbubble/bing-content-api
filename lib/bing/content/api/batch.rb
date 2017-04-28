@@ -29,6 +29,14 @@ module Bing
         def product_by_batch_id(id)
           @operations.select { |op| op.batch_id == id }.first.product
         end
+
+        def to_body
+          json_operations = @operations.map do |op|
+            op.bing_operation
+          end
+
+          { entries: json_operations }.to_json
+        end
       end
     end
   end
