@@ -1,38 +1,45 @@
 RSpec.describe Bing::Content::Api::BatchOperation do
-  context "has products" do
-    let(:product1) { build(:product) }
+  let(:product1) { build(:product) }
+  let(:batchid) { 1 }
 
-    subject(:batchop) { Bing::Content::Api::BatchOperation }
-
+  describe "#initialize" do
+  subject(:batchop) { Bing::Content::Api::BatchOperation }
     it "rejects invalid operations" do
       expect { batchop.new(1, product1, :foo) }.to raise_error(/select a valid operation/)
     end
+  end
 
-    it "produces a sane delete job" do
-      expect(batchop.new(1, product1, :delete).bing_operation).to eq({
-        :batchId => 1,
-        :method => "delete",
-        :productId => "online:en:US:3051759-US-sticker",
-      })
+  subject { Bing::Content::Api::BatchOperation.new(batchid, product1, operation).bing_operation }
+
+  describe "#bing_operation" do
+    context "insert job" do
+      let(:operation) { :insert }
+
+      it "has the correct batch id" do
+        expect(subject[:batchId]).to eq(1)
+      end
+      it "has the correct operation type" do
+        expect(subject[:method]).to eq("insert")
+      end
+      it "has a product" do
+        expect(subject[:product]).not_to be_nil
+      end
     end
+    context "delete job" do
+      let(:operation) { :delete }
 
-    it "produces a sane insert job" do
-      expect(batchop.new(1, product1, :insert).bing_operation).to eq({
-        :batchId => 1,
-        :method => "insert",
-        :product => {
-          "offerId" => "3051759-US-sticker",
-          "title" => "Awesome sticker",
-          "description" => "this is the best sticker in the world",
-          "price" => { "currency" => "USD", "value" => 6.66 },
-          "imageLink" => "https://ih1.redbubble-staging.net/image.7202580.1759/sticker,375x360-bg,ffffff.jpg",
-          "link" => "https://www.redbubble-staging.com/people/toothbrush/works/3051759-a-thing-a-church?p=sticker&size=small",
-          "targetCountry" => "US",
-          "contentLanguage" => "en",
-          "availability" => "in stock",
-          "channel" => "online",
-          "condition" => "new"},
-      })
+      it "has the correct batch id" do
+        expect(subject[:batchId]).to eq(1)
+      end
+      it "has the correct operation type" do
+        expect(subject[:method]).to eq("delete")
+      end
+      it "has no product" do
+        expect(subject[:product]).to be_nil
+      end
+      it "has a product id" do
+        expect(subject[:productId]).to eq(product1.bing_product_id)
+      end
     end
   end
 end
