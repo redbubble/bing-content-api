@@ -2,6 +2,8 @@ module Bing
   module Content
     module Api
       class Response
+        attr_reader :failures, :successes
+
         def initialize(response_entries, batch)
           @failures = batch.all_products
           @successes = []
