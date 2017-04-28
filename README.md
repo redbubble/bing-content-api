@@ -79,7 +79,7 @@ Now, submit it to the store:
 ```ruby
 batch = Bing::Content::Api::Batch.new()
 batch.add_insertions([product(1)])
-response1 = bing_client.runBatch(batch)
+response1 = bing_client.run_batch(batch)
 ```
 
 Let's see what's in the catalogue:

@@ -20,7 +20,7 @@ RSpec.describe Bing::Content::Api::Client do
         batch = Bing::Content::Api::Batch.new
         batch.add_insertions([product])
 
-        bing_client.runBatch(batch)
+        bing_client.run_batch(batch)
 
         catalogue = bing_client.retrieve_catalogue
         expected_product = product.to_record

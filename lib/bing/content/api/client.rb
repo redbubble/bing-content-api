@@ -34,7 +34,7 @@ module Bing
           self.refresh_token = @token.refresh_token
         end
 
-        def runBatch(batch)
+        def run_batch(batch)
           batch_processor = Bing::Content::Api::BatchProcessor.new(connector)
           batch_processor.execute(batch)
         end
