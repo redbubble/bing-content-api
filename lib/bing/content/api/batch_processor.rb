@@ -12,17 +12,8 @@ module Bing
           body = JSON.parse(http_response.body)
           entries = body["entries"]
 
-          response = Bing::Content::Api::Response.new
-          response.set_all_products(batch.all_products)
-
-          entries.each do |entry|
-            id = entry["batchId"].to_i
-            response.add_success(batch.product_by_batch_id(id))
-          end
-
-          response
+          Bing::Content::Api::Response.new(entries, batch)
         end
-
       end
     end
   end
