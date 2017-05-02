@@ -12,5 +12,10 @@ FactoryGirl.define do
     availability "in stock"
     channel "online"
     condition "new"
+    custom_label_0 "foo"
+    custom_label_1 "bar"
+    custom_label_2 "baz"
+    custom_label_3 "quux"
+    custom_label_4 "eek"
   end
 end

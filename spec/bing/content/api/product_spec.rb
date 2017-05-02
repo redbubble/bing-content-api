@@ -60,6 +60,26 @@ RSpec.describe Bing::Content::Api::Product do
     it "has a product category" do
       expect(subject["productCategory"]).to eq(product.product_category)
     end
+
+    it "has custom label 0" do
+      expect(subject["customLabel0"]).to eq(product.custom_label_0)
+    end
+
+    it "has custom label 1" do
+      expect(subject["customLabel1"]).to eq(product.custom_label_1)
+    end
+
+    it "has custom label 2" do
+      expect(subject["customLabel2"]).to eq(product.custom_label_2)
+    end
+
+    it "has custom label 3" do
+      expect(subject["customLabel3"]).to eq(product.custom_label_3)
+    end
+
+    it "has custom label 4" do
+      expect(subject["customLabel4"]).to eq(product.custom_label_4)
+    end
   end
 
   describe "#bing_product_id" do
