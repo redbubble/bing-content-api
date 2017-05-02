@@ -1,7 +1,7 @@
 module Bing
   module Content
     module Api
-      VERSION = "0.2.2"
+      VERSION = "0.3.0"
     end
   end
 end
