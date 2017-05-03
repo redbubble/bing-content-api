@@ -45,6 +45,14 @@ module Bing
           JSON.parse(response.body)["resources"]
         end
 
+        def connector
+          refresh_token! unless @connector
+          @connector ||= Bing::Content::Api::Connector.new(@developer_token,
+                                                           @token.token,
+                                                           @merchant_id,
+                                                           @catalogue_id)
+        end
+
         private
 
         def refresh_token!
@@ -68,14 +76,6 @@ module Bing
 
         def extract_code(redirected_url)
           /code=([0-9a-zA-Z\-]+)&/.match(redirected_url)[1]
-        end
-
-        def connector
-          refresh_token! unless @connector
-          @connector ||= Bing::Content::Api::Connector.new(@developer_token,
-                                                           @token.token,
-                                                           @merchant_id,
-                                                           @catalogue_id)
         end
 
         def oauth_client
