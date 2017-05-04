@@ -51,7 +51,7 @@ RSpec.describe Bing::Content::Api::Client do
         expected_product = product.to_record
         catalogue_product = catalogue[0]
 
-        %w[offer_id title description price product_link image_link target_country content_language availability channel condition].each do |key|
+        %w(offer_id title description price product_link image_link target_country content_language availability channel condition).each do |key|
           expect(catalogue_product[key]).to eq(expected_product[key])
         end
       end
