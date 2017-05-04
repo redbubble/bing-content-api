@@ -30,7 +30,7 @@ module Bing
         def fetch_token_with_code!(verified_url)
           @token = oauth_client.auth_code.get_token(
             extract_code(verified_url),
-            :redirect_uri => REDIRECT_URI
+            redirect_uri: REDIRECT_URI
           )
           self.refresh_token = @token.refresh_token
         end
