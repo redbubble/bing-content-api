@@ -23,7 +23,7 @@ module Bing
         end
 
         def all_products
-          @operations.map { |op| op.product }
+          @operations.map(&:product)
         end
 
         def product_by_batch_id(id)
@@ -31,10 +31,7 @@ module Bing
         end
 
         def to_body
-          json_operations = @operations.map do |op|
-            op.bing_operation
-          end
-
+          json_operations = @operations.map(&:bing_operation)
           { entries: json_operations }.to_json
         end
       end

@@ -1,18 +1,18 @@
 RSpec.describe Bing::Content::Api::Connector do
 
-    let(:developer_token) { "dev_token_foo" }
-    let(:token) { "token_foo" }
-    let(:merchant_id) { "123" }
-    let(:catalogue_id) { nil }
-
-    let(:product) { build(:product) }
-
-    let(:bing_connector) {
-      Bing::Content::Api::Connector.new(
-        developer_token,
-        token,
-        merchant_id,
-        catalogue_id) }
+  let(:developer_token) { "dev_token_foo" }
+  let(:token) { "token_foo" }
+  let(:merchant_id) { "123" }
+  let(:catalogue_id) { nil }
+  let(:product) { build(:product) }
+  let(:bing_connector) do
+    described_class.new(
+      developer_token,
+      token,
+      merchant_id,
+      catalogue_id
+    )
+  end
 
   context "has valid refresh_token" do
     it "successfully performs a GET request" do
@@ -23,7 +23,7 @@ RSpec.describe Bing::Content::Api::Connector do
 
     it "successfully performs a POST request" do
       VCR.use_cassette("test-post") do
-      expect(bing_connector.post('/products/batch', "{\"entries\": [] }").body).to match(/content#productsCustomBatchResponse/)
+        expect(bing_connector.post('/products/batch', "{\"entries\": [] }").body).to match(/content#productsCustomBatchResponse/)
       end
     end
 
@@ -34,6 +34,7 @@ RSpec.describe Bing::Content::Api::Connector do
 
   context "has non-default catalogue id" do
     let(:catalogue_id) { "789" }
+
     it "uses correct BMC URL parameter for POST" do
       VCR.use_cassette("test-catalogue-id") do
         expect(bing_connector.post('/products/batch', "{\"entries\": [] }").body).to match(/content#productsCustomBatchResponse/)

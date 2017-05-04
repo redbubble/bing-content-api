@@ -22,14 +22,15 @@ module Bing
 
         def generate_user_authorisation_url
           oauth_client.auth_code.authorize_url(
-            :state => "ArizonaIsAState",
-            :scope => "bingads.manage")
+            state: "ArizonaIsAState",
+            scope: "bingads.manage"
+          )
         end
 
         def fetch_token_with_code!(verified_url)
           @token = oauth_client.auth_code.get_token(
             extract_code(verified_url),
-            :redirect_uri => REDIRECT_URI
+            redirect_uri: REDIRECT_URI
           )
           self.refresh_token = @token.refresh_token
         end
@@ -54,7 +55,7 @@ module Bing
         end
 
         def refresh_token=(value)
-          if @refresh_token_callback then
+          if @refresh_token_callback
             @refresh_token_callback.call(value)
           else
             puts "WARNING: this is the default refresh_token_callback."
@@ -78,12 +79,13 @@ module Bing
         end
 
         def oauth_client
-          @oauth_client ||= OAuth2::Client.new(@client_id,
+          @oauth_client ||= OAuth2::Client.new(
+            @client_id,
             nil, # client secret isn't applicable for our use
-            :site => 'https://login.live.com',
-            :authorize_url => '/oauth20_authorize.srf',
-            :token_url     => '/oauth20_token.srf',
-            :redirect_uri  => REDIRECT_URI
+            site: 'https://login.live.com',
+            authorize_url: '/oauth20_authorize.srf',
+            token_url: '/oauth20_token.srf',
+            redirect_uri: REDIRECT_URI
           )
         end
       end

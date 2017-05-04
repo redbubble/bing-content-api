@@ -2,16 +2,16 @@ RSpec.describe Bing::Content::Api::Client do
 
   let(:refresh_token) { "foobarbaz" }
   let(:bing_client) do
-    Bing::Content::Api::Client.new(
-      "app_id_foo",
-      "dev_token_foo",
-      "merchant_id_foo",
-      refresh_token)
+    described_class.new("app_id_foo",
+                        "dev_token_foo",
+                        "merchant_id_foo",
+                        refresh_token)
   end
 
   describe "#retrieve_catalogue" do
     context "has valid refresh_token" do
-      let(:response) { instance_double("HTTPI::Response", :body => "{}") }
+      let(:response) { instance_double("HTTPI::Response", body: "{}") }
+
       before do
         allow_any_instance_of(Bing::Content::Api::Connector).to receive(:get).and_return(response)
       end
@@ -25,7 +25,7 @@ RSpec.describe Bing::Content::Api::Client do
 
       it "makes callback with new refresh token" do
         VCR.use_cassette("oauth-refresh") do
-          callback = lambda { |token| }
+          callback = ->(token) {}
           expect(callback).to receive(:call).with("refreshtokenAAAfoo")
           bing_client.refresh_token_callback = callback
           bing_client.retrieve_catalogue
@@ -56,7 +56,7 @@ RSpec.describe Bing::Content::Api::Client do
   describe "#fetch_token_with_code!" do
     it "converts code from URL into refresh_token" do
       VCR.use_cassette("code-to-token") do
-        callback = lambda { |token| }
+        callback = ->(token) {}
         expect(callback).to receive(:call).with("refresh_token_totoAAA")
         bing_client.refresh_token_callback = callback
         bing_client.fetch_token_with_code!("https://login.live.com/oauth20_desktop.srf?code=code-toto&state=ArizonaIsAState&lc=1033")

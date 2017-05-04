@@ -1,12 +1,12 @@
 RSpec.describe Bing::Content::Api::Batch do
   context "has products" do
+    subject(:batch) { described_class.new }
+
     let(:product1) { build(:product) }
     let(:product2) { build(:product, offer_id: 2) }
     let(:product3) { build(:product, offer_id: 3) }
     let(:product4) { build(:product, offer_id: 4) }
     let(:product5) { build(:product, offer_id: 5) }
-
-    subject(:batch) { Bing::Content::Api::Batch.new }
 
     describe "#initialize" do
       it "starts empty" do
@@ -43,7 +43,7 @@ RSpec.describe Bing::Content::Api::Batch do
 
     describe "#to_body" do
       it "has the right shape" do
-        expect(subject.to_body["entries"]).not_to be_nil
+        expect(batch.to_body["entries"]).not_to be_nil
       end
     end
   end
