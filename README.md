@@ -1,6 +1,7 @@
 # Bing::Content::Api
 
 [![Code Climate](https://codeclimate.com/github/redbubble/bing-content-api/badges/gpa.svg)](https://codeclimate.com/github/redbubble/bing-content-api)
+[![Build Status](https://travis-ci.org/redbubble/bing-content-api.svg?branch=master)](https://travis-ci.org/redbubble/bing-content-api)
 
 This Gem is intended to be an as-thin-as-possible wrapper around the
 Bing Ads Content API.
