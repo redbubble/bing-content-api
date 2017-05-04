@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Paul David']
   spec.email         = ['paul.david@redbubble.com']
 
-  spec.summary       = %q{Interface with Bing Content API for managing Shopping Ads.}
+  spec.summary       = 'Interface with Bing Content API for managing Shopping Ads.'
   spec.homepage      = 'https://github.com/redbubble/bing-content-api'
   spec.license       = 'WTFPL'
 
