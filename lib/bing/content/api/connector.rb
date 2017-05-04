@@ -23,7 +23,7 @@ module Bing
 
         def post(path, body)
           request = HTTPI::Request.new
-          params = { :"bmc-catalog-id" => @catalogue_id } if @catalogue_id
+          params = { "bmc-catalog-id": @catalogue_id } if @catalogue_id
           url = BMC_HOST + base_uri + path_with_params(path, params)
           request.url = url
           request.body = body

@@ -5,7 +5,7 @@ RSpec.describe Bing::Content::Api::BatchProcessor do
 
     let(:product1) { build(:product) }
     let(:connector) { instance_double("Connector") }
-    let(:response) { instance_double("Response", body: '{"entries": []}') }
+    let(:response) { instance_double("Response", body: '{"entries": []}', error?: false) }
     let(:batch) { Bing::Content::Api::Batch.new }
 
     it "posts a payload to the batch endpoint" do
