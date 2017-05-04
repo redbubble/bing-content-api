@@ -1,0 +1,76 @@
+require: rubocop-rspec
+
+AllCops:
+  Exclude:
+    - "**/vendor/**/*"
+
+Rails:
+  Enabled: true
+
+RSpec/NestedGroups:
+  Enabled: false
+
+Style/MultilineMethodCallIndentation:
+  Enabled: false
+
+# Because https://www.viget.com/articles/just-use-double-quoted-ruby-strings
+Style/StringLiterals:
+  Enabled: false
+
+# Because that way you avoid spurious Git diff touching already-present array elements.
+#
+# For example, if we have:
+#
+# [                  [
+#   item1,             item1,
+#   item2,    =>       item2,
+#                      item3,
+# ]                  ]
+#
+# See how item2 would have been "touched" if it didn't have a trailing comma.
+Style/TrailingCommaInLiteral:
+  Enabled: false
+
+# We have large monitors, yo.
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+# Stop moaning about missing class documentation comments.
+Documentation:
+  Enabled: false
+
+# These are from our Code Climate config.
+Lint/AssignmentInCondition:
+  Enabled: false
+Style/SpaceInsideHashLiteralBraces:
+  Enabled: false
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+Style/SpaceInsideParens:
+  Enabled: false
+Style/SpaceInsideBrackets:
+  Enabled: false
+Style/SpaceAroundEqualsInParameterDefault:
+  Enabled: false
+Style/NegatedIf:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+  Max: 20
+Rails/HttpPositionalArguments:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
