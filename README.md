@@ -112,6 +112,19 @@ contributors are expected to adhere to
 the [Contributor Covenant](http://contributor-covenant.org) code of
 conduct.
 
+Maintainers
+-------
+
+
+
+[![](doc/redbubble.png)][redbubble]
+
+The Bing Content API gem is maintained and funded
+by [Redbubble][redbubble].
+
+paul.david@redbubble.com
+
+[redbubble]: https://www.redbubble.com
 
 ## License
 
