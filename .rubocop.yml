@@ -65,6 +65,8 @@ Style/SpaceAroundEqualsInParameterDefault:
   Enabled: false
 Style/NegatedIf:
   Enabled: false
+Metrics/BlockLength:
+  Enabled: false
 Metrics/MethodLength:
   Enabled: false
 Metrics/AbcSize:
